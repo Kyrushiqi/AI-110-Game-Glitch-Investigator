@@ -15,7 +15,7 @@ Answer each question in 3 to 5 sentences. Be specific and honest about what actu
       - Easy should have a range of 1-20 and attempts allowed should be 8. (Change attempts allowed from 6 to 8)
       - Normal should have a range of 1-50 and attempts allowed should be 6. (Change Range from 1-100 to 1-50 and attempts allowed from 8 to 6)
       - Hard should have a range of 1-100 and attempts allowed should be 5 (Change range from 1-50 to 1-100)
-    - The Submitting Guess button doesn't record the number in history unless you press the button twice. Attempts made were inaccurate. I guessed 8 times on the hard difficulty but it only recorded 4 attempts.
+    - The Submit Guess button doesn't record the number in history unless you press the button twice. Attempts made were inaccurate. I guessed 8 times on the hard difficulty but it only recorded 4 attempts.
     - On Difficulty setting Normal, when guessing numbers 1-10 and entering them using the Submit Guess button, the History only records 1 2 4 6 8 with an attempt of 5, when I pressed the Submit Guess button 10 times. --> Widget State Synchronization problem.
     - The first time playing the game/new game. In the first guess, when submitting "Submit Guess" the History isn't updated. It only updates after the second click of "Submit Guess."
     - The game states "Out of attempts! The secret was __. Score:0" when 1 attempt is still left.
@@ -47,6 +47,19 @@ Answer each question in 3 to 5 sentences. Be specific and honest about what actu
 ## 4. What did you learn about Streamlit and state?
 
 - How would you explain Streamlit "reruns" and session state to a friend who has never used Streamlit?
+### Streamlit Reruns
+**Definition:** Every time a user interacts with your app (clicks a button, types in a text box, texts an input), Streamlit reruns your entire Python script from top to bottom. This is different from typical websites where only specific parts update.
+
+**Example from the game:** When you click "Submit Guess," Streamlit reruns the entire `app.py` script. Your `secret_number` variable, `attempts` counter, and `history` list all get recreated.
+
+**Analogy:** It's like a cashier who starts a new transaction from scratch every time you hand them a coin—without a receipt to track what you've already paid, they won't remember.
+
+### Session State
+**Definition:** Session state is Streamlit's way of saving data across reruns so variables don't reset.
+
+**Example from the game:** `st.session_state.secret` stores the secret number so it doesn't get a new random value on every rerun. `st.session_state.attempts` tracks how many guesses you've made and doesn't reset to 0.
+
+**Analogy:** It's like a sticky note on the cashier's desk that says "they've already paid $5"—even when you hand them another coin (trigger a rerun), the cashier checks the sticky note first and remembers what happened before.
 
 ---
 
@@ -54,5 +67,11 @@ Answer each question in 3 to 5 sentences. Be specific and honest about what actu
 
 - What is one habit or strategy from this project that you want to reuse in future labs or projects?
   - This could be a testing habit, a prompting strategy, or a way you used Git.
+
+  Switching between the AI modes: Agent, Ask, Plan and using pytest to test code logic.
 - What is one thing you would do differently next time you work with AI on a coding task?
+
+  Having a separate AI chat to ask concept questions.
 - In one or two sentences, describe how this project changed the way you think about AI generated code.
+  
+  Through this project, I realized that AI generated code can make mistakes and can be redundant. You need to be very specific about what you want in order to get the best output. 
