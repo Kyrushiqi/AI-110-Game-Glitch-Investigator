@@ -16,8 +16,8 @@ difficulty = st.sidebar.selectbox(
 )
 
 attempt_limit_map = {
-    "Easy": 6,
-    "Normal": 8,
+    "Easy": 8,
+    "Normal": 6,
     "Hard": 5,
 }
 attempt_limit = attempt_limit_map[difficulty]
@@ -56,21 +56,25 @@ with st.expander("Developer Debug Info"):
     st.write("Difficulty:", difficulty)
     st.write("History:", st.session_state.history)
 
-raw_guess = st.text_input(
-    "Enter your guess:",
-    key=f"guess_input_{difficulty}"
-)
-
 col1, col2, col3 = st.columns(3)
-with col1:
-    submit = st.button("Submit Guess 🚀")
+
 with col2:
     new_game = st.button("New Game 🔁")
 with col3:
     show_hint = st.checkbox("Show hint", value=True)
 
+# FIX: Widget State synchronization problem resolved by implementing st.form() and st.form_submit_button() for the guess input and submit button.
+# These fixes automatically resets the form after submission.
+with col1:
+    with st.form("guess_form"):
+        raw_guess = st.text_input(
+            "Enter your guess:",
+            key=f"guess_input_{difficulty}"
+        )
+        submit = st.form_submit_button("Submit Guess 🚀")
+
 if new_game:
-    st.session_state.attempts = 0
+    st.session_state.attempts = 1
     st.session_state.secret = random.randint(low, high)
     st.session_state.score = 0
     st.session_state.status = "playing"
@@ -116,7 +120,9 @@ if submit:
                 f"Final score: {st.session_state.score}"
             )
         else:
-            if st.session_state.attempts >= attempt_limit:
+            # FIX: Fixed attempt limit check to be > instead of >=. 
+            # This allows the player to have the correct number of attempts as specified by the attempt_limit variable.
+            if st.session_state.attempts > attempt_limit:
                 st.session_state.status = "lost"
                 st.error(
                     f"Out of attempts! "

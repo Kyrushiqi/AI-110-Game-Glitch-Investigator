@@ -1,16 +1,16 @@
 # FIX: Transfered app.py's 4 functions to logic_utils.py using Copilot. 
 # Updated imports in app.py and tests/test_game_logic.py accordingly.
 
-# FIX: get_range_for_difficulty now returns (1, 100) for "Easy", (1, 50) for "Normal", and (1, 20) for "Hard". 
+# FIX: get_range_for_difficulty now returns (1, 20) for "Easy", (1, 50) for "Normal", and (1, 100) for "Hard". 
 # The previous version's ranges for each difficulty level doesn't match their corresponding difficulty level. 
 def get_range_for_difficulty(difficulty: str):
     """Return (low, high) inclusive range for a given difficulty."""
     if difficulty == "Easy":
-        return 1, 100
+        return 1, 20
     if difficulty == "Normal":
         return 1, 50
     if difficulty == "Hard":
-        return 1, 20
+        return 1, 100
     return 1, 100
 
 

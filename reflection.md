@@ -11,11 +11,14 @@ Answer each question in 3 to 5 sentences. Be specific and honest about what actu
   (for example: "the hints were backwards").
     - The hints were not accurate and allows the player to guess beyond the limit. For example, the secret number would be 96 but when guessing 100 it would tell me to "Go HIGHER"
     - New Game button only changes 'Secret' field and reverts 'Attempts' field back to 0. It doesn't erase the history from previous round.
-    - The Score can be a negative number when the lowest number should be 0.
     - The attempts allowed and ranges for each difficulty level doesn't match their corresponding difficulty level. 
       - Easy should have a range of 1-20 and attempts allowed should be 8. (Change attempts allowed from 6 to 8)
       - Normal should have a range of 1-50 and attempts allowed should be 6. (Change Range from 1-100 to 1-50 and attempts allowed from 8 to 6)
       - Hard should have a range of 1-100 and attempts allowed should be 5 (Change range from 1-50 to 1-100)
+    - The Submitting Guess button doesn't record the number in history unless you press the button twice. Attempts made were inaccurate. I guessed 8 times on the hard difficulty but it only recorded 4 attempts.
+    - On Difficulty setting Normal, when guessing numbers 1-10 and entering them using the Submit Guess button, the History only records 1 2 4 6 8 with an attempt of 5, when I pressed the Submit Guess button 10 times. --> Widget State Synchronization problem.
+    - The first time playing the game/new game. In the first guess, when submitting "Submit Guess" the History isn't updated. It only updates after the second click of "Submit Guess."
+    - The game states "Out of attempts! The secret was __. Score:0" when 1 attempt is still left.
 
 ---
 
